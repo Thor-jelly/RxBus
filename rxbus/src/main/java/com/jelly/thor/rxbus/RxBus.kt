@@ -39,11 +39,11 @@ class RxBus private constructor() {
     }
 
     /**
-     * 移除所有的Sticky事件
+     * 移除指定eventType的Sticky事件
      */
-    fun removeAllStickyEvents() {
+    fun <T> removeStickyEvent(eventType: Class<T>): T? {
         synchronized(mStickyEventMap) {
-            mStickyEventMap.clear()
+            return eventType.cast(mStickyEventMap.remove(eventType))
         }
     }
 
